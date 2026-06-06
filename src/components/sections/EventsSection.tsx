@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { LINKS } from "@/lib/config";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 
@@ -129,7 +130,7 @@ export function EventsSection() {
                 <p className="font-inter text-sm text-white/40 leading-relaxed mb-8">{event.desc}</p>
 
                 <a
-                  href="https://wa.link/4c0t55"
+                  href={LINKS.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 font-inter text-xs tracking-[0.3em] text-gold uppercase hover:gap-5 transition-all duration-300"

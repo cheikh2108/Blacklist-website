@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { LINKS } from "@/lib/config";
 
 export function Footer() {
   return (
@@ -27,7 +28,7 @@ export function Footer() {
           {/* Links */}
           <div className="flex flex-col gap-3 md:items-end">
             <a
-              href="https://wa.link/4c0t55"
+              href={LINKS.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
               className="font-inter text-xs tracking-[0.3em] text-white/40 hover:text-gold uppercase transition-colors"
@@ -35,7 +36,7 @@ export function Footer() {
               Réservation
             </a>
             <a
-              href="https://www.instagram.com/blacklistdakar/"
+              href={LINKS.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="font-inter text-xs tracking-[0.3em] text-white/40 hover:text-gold uppercase transition-colors"

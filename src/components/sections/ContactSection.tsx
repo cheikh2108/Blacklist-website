@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { LINKS } from "@/lib/config";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 
@@ -50,7 +51,7 @@ export function ContactSection() {
               <div className="reveal">
                 <p className="font-inter text-xs tracking-[0.3em] text-gold/60 uppercase mb-2">Réservations</p>
                 <a
-                  href="https://wa.link/4c0t55"
+                  href={LINKS.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-cormorant text-xl text-cream font-light hover:text-gold transition-colors"
@@ -62,7 +63,7 @@ export function ContactSection() {
               <div className="reveal">
                 <p className="font-inter text-xs tracking-[0.3em] text-gold/60 uppercase mb-2">Instagram</p>
                 <a
-                  href="https://www.instagram.com/blacklistdakar/"
+                  href={LINKS.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-cormorant text-xl text-cream font-light hover:text-gold transition-colors"
@@ -104,7 +105,7 @@ export function ContactSection() {
 
             <div className="reveal flex gap-4">
               <motion.a
-                href="https://wa.link/4c0t55"
+                href={LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
@@ -113,7 +114,7 @@ export function ContactSection() {
                 WhatsApp
               </motion.a>
               <motion.a
-                href="https://www.instagram.com/blacklistdakar/"
+                href={LINKS.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}

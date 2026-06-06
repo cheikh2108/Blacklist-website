@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { LINKS } from "@/lib/config";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 
@@ -70,7 +71,7 @@ export function ReservationSection() {
           </div>
 
           <motion.a
-            href="https://wa.link/4c0t55"
+            href={LINKS.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03, backgroundColor: "#C9A84C", color: "#0A0A0A" }}

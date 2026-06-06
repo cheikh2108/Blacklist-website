@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { LINKS } from "@/lib/config";
 
 const navLinks = [
   { label: "À Propos", href: "#about", num: "01" },
@@ -140,7 +141,7 @@ export function Navigation() {
                 <div>
                   <p className="font-inter text-xs text-gold/60 tracking-[0.3em] uppercase mb-3">Réservations</p>
                   <a
-                    href={process.env.NEXT_PUBLIC_WHATSAPP_LINK || "https://wa.link/4c0t55"}
+                    href={LINKS.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-cormorant text-2xl text-cream font-light hover:text-gold transition-colors"
