@@ -125,13 +125,33 @@ export function HeroSection({ isLoaded }: HeroSectionProps) {
         <source src="/videos/video-hero-section.mp4" type="video/mp4" />
       </video>
 
-      {/* Overlays */}
+      {/* Overlay global — assombrit la vidéo pour la lisibilité */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"
-        style={{ opacity: 0.65 }}
+        className="absolute inset-0"
+        style={{ opacity: 0.65, background: "rgba(0,0,0,0.45)" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
+
+      {/* Vignette — bords noirs pour délimiter le contenu */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)",
+        }}
+      />
+
+      {/* Gradient haut — transition propre vers la nav */}
+      <div
+        className="absolute top-0 left-0 right-0 h-40 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.6), transparent)" }}
+      />
+
+      {/* Gradient bas — délimitation vers la section suivante */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
+        style={{ background: "linear-gradient(to top, rgba(0,0,0,0.95), transparent)" }}
+      />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
@@ -155,7 +175,6 @@ export function HeroSection({ isLoaded }: HeroSectionProps) {
           className="h-px w-36 mt-7 mb-6"
           style={{ background: "linear-gradient(90deg, transparent, #C9A84C, transparent)" }}
         />
-
         {/* Tagline — Cormorant italic, léger */}
         <p
           ref={taglineRef}
