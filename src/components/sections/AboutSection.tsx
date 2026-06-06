@@ -86,14 +86,14 @@ export function AboutSection() {
           {/* Image side */}
           <div ref={imageRef} className="relative aspect-[3/4] overflow-hidden" style={{ clipPath: "inset(0 100% 0 0)" }}>
             <div className="w-full h-full bg-warm-gray relative overflow-hidden">
-              {/* Placeholder — replace with actual image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-charcoal to-warm-gray" />
-              <img
-                src="/images/about.jpg"
-                alt="Blacklist Dakar intérieur"
-                className="absolute inset-0 w-full h-full object-cover"
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-              />
+              {/* Image placeholder */}
+              <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-[#1A1410] to-warm-gray" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 opacity-20">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gold">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
+                </svg>
+                <span className="font-inter text-xs tracking-[0.3em] text-gold uppercase">Photo à venir</span>
+              </div>
               {/* Gold accent line */}
               <div className="absolute left-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-gold/40 to-transparent" />
             </div>
@@ -152,7 +152,7 @@ export function AboutSection() {
         </div>
 
         {/* Stats */}
-        <div ref={countersRef} className="mt-32 grid grid-cols-3 gap-px bg-white/5">
+        <div ref={countersRef} className="mt-24 md:mt-32 grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/5">
           {stats.map((stat, i) => (
             <div key={i} className="bg-black px-6 py-10 text-center">
               <p

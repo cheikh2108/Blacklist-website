@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 
 interface PreloaderProps {
@@ -59,15 +60,20 @@ export function Preloader({ onComplete }: PreloaderProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center"
+      className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center min-h-screen min-h-dvh"
     >
       <div className="relative flex flex-col items-center gap-6">
         <div ref={lineTopRef} className="w-px h-16 bg-gold-light opacity-40" />
 
         <div ref={logoRef} className="text-center">
-          <h1 className="font-cormorant text-7xl md:text-9xl font-light tracking-[0.3em] text-cream uppercase">
-            Blacklist
-          </h1>
+          <Image
+            src="/images/logo-blacklist.png"
+            alt="Blacklist Dakar"
+            width={220}
+            height={70}
+            className="h-16 w-auto object-contain"
+            priority
+          />
         </div>
 
         <p ref={subtitleRef} className="font-inter text-xs tracking-[0.4em] text-gold uppercase">

@@ -55,13 +55,13 @@ export function ReservationSection() {
           </p>
 
           {/* Info cards */}
-          <div className="grid grid-cols-3 gap-px bg-white/5 mb-16">
+          <div className="grid grid-cols-3 gap-px bg-white/5 mb-16 overflow-x-auto">
             {[
               { label: "Restaurant", info: "Déjeuner & Dîner", sub: "Lun – Dim" },
               { label: "Lounge", info: "À partir de 18h", sub: "Mer – Dim" },
               { label: "Rooftop", info: "Coucher de soleil", sub: "Ven – Sam" },
             ].map((item, i) => (
-              <div key={i} className="bg-black/60 px-4 py-6 backdrop-blur-sm">
+              <div key={i} className="bg-black/60 px-3 md:px-4 py-6 backdrop-blur-sm min-w-[90px]">
                 <p className="font-inter text-xs text-gold/60 tracking-[0.3em] uppercase mb-2">{item.label}</p>
                 <p className="font-cormorant text-lg text-cream font-light">{item.info}</p>
                 <p className="font-inter text-xs text-white/30 mt-1">{item.sub}</p>

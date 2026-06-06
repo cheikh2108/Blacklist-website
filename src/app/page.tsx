@@ -19,7 +19,7 @@ export default function Home() {
     <main>
       <Preloader onComplete={() => setIsLoaded(true)} />
       <Navigation />
-      <HeroSection />
+      <HeroSection isLoaded={isLoaded} />
       <AboutSection />
       <MenuSection />
       <GallerySection />

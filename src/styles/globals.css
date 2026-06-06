@@ -29,12 +29,14 @@ body {
   color: #F5F0E8;
   font-family: var(--font-inter), sans-serif;
   overflow-x: hidden;
-  cursor: none; /* Custom cursor */
+  cursor: none;
 }
 
-/* Hide default cursor on all elements */
-*, *::before, *::after {
-  cursor: none !important;
+/* Hide default cursor — uniquement sur les écrans avec souris */
+@media (hover: hover) and (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 
 /* Grain overlay */
@@ -106,4 +108,22 @@ img {
 /* Overflow for GSAP horizontal scroll */
 .horizontal-scroll-container {
   overflow: hidden;
+}
+
+/* Mobile — prevent horizontal overflow on all sections */
+@media (max-width: 639px) {
+  .container { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+
+/* Hero title — responsive font-size + letter-spacing */
+.hero-title {
+  font-size: clamp(2rem, 11.5vw, 12rem);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+@media (min-width: 640px) {
+  .hero-title { letter-spacing: 0.10em; }
+}
+@media (min-width: 1024px) {
+  .hero-title { letter-spacing: 0.16em; }
 }

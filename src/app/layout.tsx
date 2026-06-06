@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Playfair_Display } from "next/font/google";
+import { Cormorant_Garamond, Inter, DM_Serif_Display } from "next/font/google";
 import "@/styles/globals.css";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { CustomCursor } from "@/components/ui/CustomCursor";
-import { GrainOverlay } from "@/components/ui/GrainOverlay";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -19,11 +18,11 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
   style: ["normal", "italic"],
-  variable: "--font-playfair",
+  variable: "--font-dm-serif",
   display: "swap",
 });
 
@@ -46,11 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${cormorant.variable} ${inter.variable} ${playfair.variable}`}>
+    <html lang="fr" className={`${cormorant.variable} ${inter.variable} ${dmSerif.variable}`}>
       <body className="bg-black text-cream antialiased">
         <SmoothScrollProvider>
           <CustomCursor />
-          <GrainOverlay />
           {children}
         </SmoothScrollProvider>
       </body>

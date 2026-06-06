@@ -81,7 +81,7 @@ export function EventsSection() {
           <div className="mt-8 h-px bg-gradient-to-r from-gold/40 to-transparent" />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-px bg-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
           {events.map((event, i) => (
             <motion.div
               key={i}
@@ -89,18 +89,23 @@ export function EventsSection() {
               whileHover={{ y: -4 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Image */}
+              {/* Image placeholder — replace src with actual photo */}
               <div className="relative h-64 overflow-hidden">
-                <img
-                  src={event.img}
-                  alt={event.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = "none";
-                    (e.target as HTMLImageElement).parentElement!.style.background =
-                      "linear-gradient(135deg, #1A1A1A 0%, #2A2520 100%)";
+                <div
+                  className="w-full h-full transition-transform duration-700 group-hover:scale-105"
+                  style={{
+                    background: i === 0
+                      ? "linear-gradient(135deg, #1A1410 0%, #2A1E0A 100%)"
+                      : i === 1
+                      ? "linear-gradient(135deg, #101520 0%, #1A1028 100%)"
+                      : "linear-gradient(135deg, #14101A 0%, #201520 100%)",
                   }}
                 />
+                <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gold">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
+                  </svg>
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className="font-inter text-xs tracking-[0.2em] text-gold/80 uppercase bg-black/60 px-3 py-1.5 backdrop-blur-sm">

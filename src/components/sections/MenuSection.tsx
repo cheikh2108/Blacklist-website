@@ -118,7 +118,7 @@ export function MenuSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="grid md:grid-cols-2 gap-px bg-white/5"
+            className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5"
           >
             {activeItems.map((item, i) => (
               <motion.div

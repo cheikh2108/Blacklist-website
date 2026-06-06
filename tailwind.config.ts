@@ -24,6 +24,7 @@ const config: Config = {
         cormorant: ["var(--font-cormorant)", "serif"],
         inter: ["var(--font-inter)", "sans-serif"],
         playfair: ["var(--font-playfair)", "serif"],
+        "dm-serif": ["var(--font-dm-serif)", "serif"],
       },
       fontSize: {
         "10xl": ["10rem", { lineHeight: "1" }],

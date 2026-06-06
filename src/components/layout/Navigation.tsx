@@ -38,17 +38,24 @@ export function Navigation() {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-700 ${
           isScrolled ? "py-4 bg-black/80 backdrop-blur-md border-b border-white/5" : "py-6"
         }`}
       >
         <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
           <a
             href="#"
-            className="font-cormorant text-2xl tracking-[0.25em] text-cream uppercase"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            className="flex items-center"
           >
-            Blacklist
+            <Image
+              src="/images/logo-blacklist.png"
+              alt="Blacklist Dakar"
+              width={140}
+              height={44}
+              className="h-9 w-auto object-contain"
+              priority
+            />
           </a>
 
           <button
