@@ -1,54 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { LINKS } from "@/lib/config";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
+import { menuCategories } from "@/lib/menu-data";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const menuCategories = [
-  {
-    id: "entrees",
-    label: "Entrées",
-    items: [
-      { name: "Mezze Libanais", desc: "Houmous, moutabbal, fattoush, labneh aux herbes", price: "4 500" },
-      { name: "Carpaccio de Saint-Jacques", desc: "Agrumes, huile d'argan, fleur de sel", price: "6 500" },
-      { name: "Samboussek Truffe", desc: "Feuilleté croustillant, fromage, truffe noire", price: "5 500" },
-      { name: "Tartare de Thon", desc: "Avocat, sésame toasté, gingembre mariné", price: "7 000" },
-    ],
-  },
-  {
-    id: "plats",
-    label: "Plats",
-    items: [
-      { name: "Côte de Bœuf Wagyu", desc: "Grillée au feu de bois, jus réduit au vin rouge, légumes de saison", price: "28 000" },
-      { name: "Homard Rôti", desc: "Beurre noisette, citron confit, pommes dauphines", price: "32 000" },
-      { name: "Agneau Charmoula", desc: "Carré d'agneau mariné aux épices libanaises, couscous royal", price: "22 000" },
-      { name: "Daurade Royale", desc: "Cuit en croûte de sel, sauce vierge aux herbes", price: "18 000" },
-    ],
-  },
-  {
-    id: "cocktails",
-    label: "Cocktails",
-    items: [
-      { name: "Blacklist Signature", desc: "Whisky, miel de fleur d'oranger, sumac, eau pétillante", price: "8 500" },
-      { name: "Rose du Désert", desc: "Gin, sirop de rose, litchi, prosecco", price: "7 500" },
-      { name: "Nuit de Dakar", desc: "Rhum arrangé, jus de tamarin, citron vert, piment doux", price: "7 000" },
-      { name: "Lounge Spritz", desc: "Aperol, champagne, orange sanguine, basilic", price: "9 000" },
-    ],
-  },
-  {
-    id: "desserts",
-    label: "Desserts",
-    items: [
-      { name: "Baklava Revisité", desc: "Feuilles de brick, pistache de Syrie, miel d'acacia, glace fleur d'oranger", price: "5 500" },
-      { name: "Coulant Chocolat Noir", desc: "70% Valrhona, crème glacée vanille Bourbon", price: "6 000" },
-      { name: "Fruits Exotiques Flambés", desc: "Mangue, fruit de la passion, rhum vieux, sorbet coco", price: "5 000" },
-    ],
-  },
-];
 
 export function MenuSection() {
   const [activeCategory, setActiveCategory] = useState("entrees");
@@ -85,28 +45,23 @@ export function MenuSection() {
             </h2>
           </div>
           <p className="font-cormorant text-xl text-white/40 font-light italic max-w-xs">
-            Cuisine libanaise-européenne, produits frais, saveurs d'exception
+            Restaurant · Lounge · Rooftop — carte complète disponible sur place
           </p>
         </div>
 
         {/* Category tabs */}
-        <div className="flex gap-0 border-b border-white/10 mb-16 overflow-x-auto">
+        <div className="flex flex-wrap gap-2 mb-16">
           {menuCategories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`relative px-6 md:px-10 py-4 font-inter text-xs tracking-[0.3em] uppercase whitespace-nowrap transition-colors duration-300 ${
-                activeCategory === cat.id ? "text-gold" : "text-white/30 hover:text-white/60"
+              className={`relative px-5 py-2 font-inter text-xs tracking-[0.25em] uppercase transition-all duration-300 border ${
+                activeCategory === cat.id
+                  ? "border-gold text-gold bg-gold/5"
+                  : "border-white/10 text-white/30 hover:border-white/30 hover:text-white/60"
               }`}
             >
               {cat.label}
-              {activeCategory === cat.id && (
-                <motion.div
-                  layoutId="menu-indicator"
-                  className="absolute bottom-0 left-0 right-0 h-px bg-gold"
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                />
-              )}
             </button>
           ))}
         </div>
@@ -146,19 +101,31 @@ export function MenuSection() {
         </AnimatePresence>
 
         {/* CTA */}
-        <div className="mt-20 text-center">
-          <p className="font-cormorant text-xl text-white/30 italic mb-8">
+        <div className="mt-20 text-center flex flex-col items-center gap-6">
+          <p className="font-cormorant text-xl text-white/30 italic">
             Carte complète disponible sur place · Suggestions du chef selon la saison
           </p>
-          <motion.a
-            href={LINKS.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.02 }}
-            className="inline-flex items-center gap-4 px-10 py-4 bg-gold text-black font-inter text-xs tracking-[0.3em] uppercase hover:bg-gold-light transition-colors duration-300"
-          >
-            Réserver maintenant
-          </motion.a>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <motion.a
+              href={LINKS.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              className="inline-flex items-center gap-4 px-10 py-4 bg-gold text-black font-inter text-xs tracking-[0.3em] uppercase hover:bg-gold-light transition-colors duration-300"
+            >
+              Réserver maintenant
+            </motion.a>
+            <Link href="/menu">
+              <motion.span
+                whileHover={{ x: 4 }}
+                transition={{ duration: 0.3 }}
+                className="inline-flex items-center gap-3 font-inter text-xs tracking-[0.3em] text-gold/70 uppercase hover:text-gold transition-colors duration-300"
+              >
+                Voir la carte complète
+                <span className="w-8 h-px bg-gold/70" />
+              </motion.span>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
