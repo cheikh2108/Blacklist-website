@@ -29,6 +29,7 @@ export default function MenuPage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.fromTo(
@@ -40,7 +41,14 @@ export default function MenuPage() {
 
   const handleCategoryChange = (id: string) => {
     setActiveCategory(id);
-    window.scrollTo({ top: tabsRef.current?.offsetTop ?? 0, behavior: "smooth" });
+    // Scroll vers le haut de la grille (juste sous la barre sticky)
+    requestAnimationFrame(() => {
+      if (gridRef.current) {
+        const stickyHeight = tabsRef.current?.offsetHeight ?? 56;
+        const top = gridRef.current.getBoundingClientRect().top + window.scrollY - stickyHeight - 24;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    });
   };
 
   const activeItems = menuCategories.find((c) => c.id === activeCategory)?.items ?? [];
@@ -123,7 +131,7 @@ export default function MenuPage() {
       </div>
 
       {/* Items grid */}
-      <div className="container mx-auto max-w-6xl px-6 md:px-12 py-16 md:py-24">
+      <div ref={gridRef} className="container mx-auto max-w-6xl px-6 md:px-12 py-16 md:py-24">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}

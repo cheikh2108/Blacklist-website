@@ -42,8 +42,8 @@ export function Preloader({ onComplete }: PreloaderProps) {
         progressTextRef.current,
         {
           innerHTML: 100,
-          duration: 1.8,
-          ease: "power2.inOut",
+          duration: 2.4,
+          ease: "power1.inOut",
           snap: { innerHTML: 1 },
           onUpdate() {
             const val = Math.round(Number((this.targets()[0] as HTMLElement).innerHTML));
@@ -54,7 +54,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
         },
         1.0
       )
-      .to({}, { duration: 0.3 });
+      .to({}, { duration: 0.5 });
   }, [onComplete]);
 
   return (
