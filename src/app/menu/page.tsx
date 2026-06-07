@@ -28,6 +28,7 @@ export default function MenuPage() {
   const [activeCategory, setActiveCategory] = useState("entrees");
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.fromTo(
@@ -36,6 +37,11 @@ export default function MenuPage() {
       { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.1 }
     );
   }, []);
+
+  const handleCategoryChange = (id: string) => {
+    setActiveCategory(id);
+    window.scrollTo({ top: tabsRef.current?.offsetTop ?? 0, behavior: "smooth" });
+  };
 
   const activeItems = menuCategories.find((c) => c.id === activeCategory)?.items ?? [];
 
@@ -91,16 +97,18 @@ export default function MenuPage() {
 
       {/* Sticky category tabs */}
       <div
+        ref={tabsRef}
         className="sticky top-0 z-30 backdrop-blur-md border-b"
         style={{ background: "rgba(10,10,10,0.9)", borderColor: "rgba(255,255,255,0.06)" }}
       >
-        <div className="container mx-auto max-w-6xl px-6 md:px-12 py-4">
-          <div className="flex flex-wrap gap-2">
+        <div className="container mx-auto max-w-6xl px-6 md:px-12 py-3">
+          {/* Mobile : défilement horizontal silencieux — Desktop : wrap */}
+          <div className="flex gap-2 overflow-x-auto md:flex-wrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {menuCategories.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className="relative px-4 py-2 font-inter text-[10px] tracking-[0.3em] uppercase transition-all duration-300 border"
+                onClick={() => handleCategoryChange(cat.id)}
+                className="shrink-0 relative px-4 py-1.5 font-inter text-[10px] tracking-[0.3em] uppercase transition-all duration-300 border"
                 style={{
                   color: activeCategory === cat.id ? "#C9A84C" : "rgba(255,255,255,0.3)",
                   borderColor: activeCategory === cat.id ? "rgba(201,168,76,0.6)" : "rgba(255,255,255,0.1)",
