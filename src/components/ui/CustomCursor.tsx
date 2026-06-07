@@ -15,6 +15,10 @@ export function CustomCursor() {
     const ring = cursorRingRef.current;
     if (!dot || !ring) return;
 
+    // Rendre visible seulement sur desktop
+    dot.style.opacity = "1";
+    ring.style.opacity = "1";
+
     let mouseX = 0;
     let mouseY = 0;
 
@@ -90,11 +94,12 @@ export function CustomCursor() {
       <div
         ref={cursorDotRef}
         className="fixed top-0 left-0 w-1.5 h-1.5 bg-gold rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
+        style={{ opacity: 0 }}
       />
       <div
         ref={cursorRingRef}
         className="fixed top-0 left-0 w-8 h-8 border border-gold rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
-        style={{ mixBlendMode: "normal" }}
+        style={{ mixBlendMode: "normal", opacity: 0 }}
       />
     </>
   );
