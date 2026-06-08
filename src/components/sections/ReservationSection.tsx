@@ -28,10 +28,9 @@ export function ReservationSection() {
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src="/images/reservation-bg.jpg"
+          src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1400&q=80"
           alt=""
           className="w-full h-full object-cover opacity-20"
-          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/60 to-black" />
       </div>

@@ -1,19 +1,49 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { LINKS } from "@/lib/config";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
-import { menuCategories } from "@/lib/menu-data";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const featuredItems = [
+  {
+    name: "Filet de Bœuf Signature",
+    desc: "Sauce champignon ou poivre · Frites, riz, pâtes ou légumes",
+    price: "12 000",
+    image: "https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=75",
+    tag: "Plat",
+  },
+  {
+    name: "Souris d'Agneau Fondant",
+    desc: "Sauce champignon ou poivre · Frites, riz, pâtes ou légumes",
+    price: "18 000",
+    image: "https://images.unsplash.com/photo-1432139509613-5c4255815697?w=400&q=75",
+    tag: "Plat",
+  },
+  {
+    name: "Burger Blacklist",
+    desc: "Black Angus, cheddar fondu, oignons grillés, sauce forestière · Frites",
+    price: "10 500",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&q=75",
+    tag: "Burger",
+  },
+  {
+    name: "Fondant au Chocolat",
+    desc: "Cœur coulant chocolat ou caramel",
+    price: "6 500",
+    image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=75",
+    tag: "Dessert",
+  },
+];
+
 export function MenuSection() {
-  const [activeCategory, setActiveCategory] = useState("entrees");
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.fromTo(
@@ -27,15 +57,32 @@ export function MenuSection() {
         scrollTrigger: { trigger: titleRef.current, start: "top 80%", once: true },
       }
     );
-  }, []);
 
-  const activeItems = menuCategories.find((c) => c.id === activeCategory)?.items ?? [];
+    const cards = gridRef.current?.querySelectorAll(".menu-card");
+    if (cards) {
+      cards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: i * 0.1,
+            ease: "power3.out",
+            scrollTrigger: { trigger: card, start: "top 88%", once: true },
+          }
+        );
+      });
+    }
+  }, []);
 
   return (
     <section ref={sectionRef} id="menu" className="relative py-32 md:py-48 bg-charcoal overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold/5 via-transparent to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-12">
+
         {/* Header */}
         <div ref={titleRef} className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
           <div>
@@ -45,63 +92,56 @@ export function MenuSection() {
             </h2>
           </div>
           <p className="font-cormorant text-xl text-white/40 font-light italic max-w-xs">
-            Restaurant · Lounge · Rooftop — carte complète disponible sur place
+            Nos incontournables — cuisine libanaise & européenne
           </p>
         </div>
 
-        {/* Category tabs */}
-        <div className="flex flex-wrap gap-2 mb-16">
-          {menuCategories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`relative px-5 py-2 font-inter text-xs tracking-[0.25em] uppercase transition-all duration-300 border ${
-                activeCategory === cat.id
-                  ? "border-gold text-gold bg-gold/5"
-                  : "border-white/10 text-white/30 hover:border-white/30 hover:text-white/60"
-              }`}
+        {/* 4 featured items */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5"
+        >
+          {featuredItems.map((item, i) => (
+            <motion.div
+              key={i}
+              className="menu-card group bg-charcoal overflow-hidden cursor-default"
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              {cat.label}
-            </button>
+              {/* Image */}
+              <div className="relative h-52 overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-75"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <span className="font-inter text-[9px] tracking-[0.25em] uppercase text-gold/80 bg-black/60 px-2.5 py-1 backdrop-blur-sm">
+                    {item.tag}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="font-cormorant text-xl text-cream font-light group-hover:text-gold transition-colors duration-300 leading-snug mb-2">
+                  {item.name}
+                </h3>
+                <p className="font-inter text-xs text-white/40 leading-relaxed mb-4">{item.desc}</p>
+                <div className="flex items-center justify-between">
+                  <p className="font-cormorant text-lg text-gold font-light">
+                    {item.price} <span className="text-xs">FCFA</span>
+                  </p>
+                  <div className="w-6 h-px bg-gold/30 group-hover:w-10 group-hover:bg-gold transition-all duration-500" />
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Menu items */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5"
-          >
-            {activeItems.map((item, i) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-                className="bg-charcoal p-8 group hover:bg-warm-gray transition-colors duration-500 cursor-default"
-                data-cursor="hover"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="font-cormorant text-2xl text-cream font-light group-hover:text-gold transition-colors duration-300">
-                      {item.name}
-                    </h3>
-                    <p className="font-inter text-sm text-white/40 mt-2 leading-relaxed">{item.desc}</p>
-                  </div>
-                  <p className="font-cormorant text-xl text-gold font-light shrink-0 mt-1">{item.price} <span className="text-sm">FCFA</span></p>
-                </div>
-                <div className="mt-4 h-px bg-white/5 group-hover:bg-gold/20 transition-colors duration-500" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
         {/* CTA */}
-        <div className="mt-20 text-center flex flex-col items-center gap-6">
+        <div className="mt-16 text-center flex flex-col items-center gap-6">
           <p className="font-cormorant text-xl text-white/30 italic">
             Carte complète disponible sur place · Suggestions du chef selon la saison
           </p>
@@ -127,6 +167,7 @@ export function MenuSection() {
             </Link>
           </div>
         </div>
+
       </div>
     </section>
   );

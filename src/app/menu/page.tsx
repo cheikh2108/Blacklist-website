@@ -2,27 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { menuCategories } from "@/lib/menu-data";
 import { LINKS } from "@/lib/config";
 
-function ImagePlaceholder({ name }: { name: string }) {
-  return (
-    <div
-      className="w-full h-full flex flex-col items-center justify-center gap-3"
-      style={{ background: "linear-gradient(135deg, #1A1410 0%, #2A1E10 100%)" }}
-    >
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" style={{ color: "rgba(201,168,76,0.3)" }}>
-        <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="m21 15-5-5L5 21" />
-      </svg>
-      <span className="font-inter text-[9px] tracking-[0.3em] uppercase" style={{ color: "rgba(201,168,76,0.3)" }}>
-        Photo à venir
-      </span>
-    </div>
-  );
-}
 
 export default function MenuPage() {
   const [activeCategory, setActiveCategory] = useState("entrees");
@@ -155,9 +139,11 @@ export default function MenuPage() {
               >
                 {/* Image */}
                 <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
-                  <div className="absolute inset-0">
-                    <ImagePlaceholder name={item.name} />
-                  </div>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                   {/* Overlay au hover */}
                   <div
                     className="absolute inset-0 transition-opacity duration-500"

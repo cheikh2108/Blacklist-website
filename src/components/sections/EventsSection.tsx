@@ -15,7 +15,7 @@ const events = [
     title: "Jazz Night",
     desc: "Soirée jazz live avec nos artistes résidents. Cocktails signature, ambiance feutrée, musique soul et jazz contemporain.",
     tag: "Musique Live",
-    img: "/images/event-jazz.jpg",
+    img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
   },
   {
     date: "Samedi",
@@ -23,7 +23,7 @@ const events = [
     title: "Rooftop Sessions",
     desc: "Coucher de soleil sur Dakar, DJ set exclusif, cocktails au bord de la terrasse avec vue panoramique sur la ville.",
     tag: "Rooftop · DJ Set",
-    img: "/images/event-rooftop.jpg",
+    img: "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800&q=80",
   },
   {
     date: "Sur demande",
@@ -31,7 +31,7 @@ const events = [
     title: "Événements Privés",
     desc: "Anniversaires, dîners d'affaires, lancements — Blacklist met ses espaces à disposition pour vos événements exclusifs.",
     tag: "Privatisation",
-    img: "/images/event-private.jpg",
+    img: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80",
   },
 ];
 
@@ -90,23 +90,12 @@ export function EventsSection() {
               whileHover={{ y: -4 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Image placeholder — replace src with actual photo */}
               <div className="relative h-64 overflow-hidden">
-                <div
-                  className="w-full h-full transition-transform duration-700 group-hover:scale-105"
-                  style={{
-                    background: i === 0
-                      ? "linear-gradient(135deg, #1A1410 0%, #2A1E0A 100%)"
-                      : i === 1
-                      ? "linear-gradient(135deg, #101520 0%, #1A1028 100%)"
-                      : "linear-gradient(135deg, #14101A 0%, #201520 100%)",
-                  }}
+                <img
+                  src={event.img}
+                  alt={event.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gold">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
-                  </svg>
-                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className="font-inter text-xs tracking-[0.2em] text-gold/80 uppercase bg-black/60 px-3 py-1.5 backdrop-blur-sm">

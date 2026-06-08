@@ -87,14 +87,9 @@ export function ContactSection() {
           <div className="flex flex-col gap-12">
             <div className="reveal aspect-video relative overflow-hidden bg-warm-gray">
               <img
-                src="/images/contact-img.jpg"
+                src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?w=900&q=80"
                 alt="Blacklist Dakar vue extérieure"
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                  (e.target as HTMLImageElement).parentElement!.style.background =
-                    "linear-gradient(135deg, #1A1A1A 0%, #2A2520 100%)";
-                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-6 left-6">

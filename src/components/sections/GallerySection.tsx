@@ -7,15 +7,14 @@ import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Gallery items — replace src with actual images/videos
 const galleryItems = [
-  { type: "image", src: "/images/gallery-1.jpg", span: "col-span-2 row-span-2", alt: "Ambiance lounge" },
-  { type: "image", src: "/images/gallery-2.jpg", span: "col-span-1 row-span-1", alt: "Cocktail signature" },
-  { type: "image", src: "/images/gallery-3.jpg", span: "col-span-1 row-span-1", alt: "Plat gastronomique" },
-  { type: "video", src: "/videos/gallery-1.mp4", span: "col-span-1 row-span-2", alt: "Rooftop" },
-  { type: "image", src: "/images/gallery-4.jpg", span: "col-span-2 row-span-1", alt: "Vue panoramique" },
-  { type: "image", src: "/images/gallery-5.jpg", span: "col-span-1 row-span-1", alt: "Bar" },
-  { type: "image", src: "/images/gallery-6.jpg", span: "col-span-1 row-span-1", alt: "Cuisine" },
+  { type: "image", src: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80", span: "col-span-2 row-span-2", alt: "Ambiance lounge" },
+  { type: "image", src: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=600&q=80", span: "col-span-1 row-span-1", alt: "Cocktail signature" },
+  { type: "image", src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80", span: "col-span-1 row-span-1", alt: "Plat gastronomique" },
+  { type: "image", src: "https://images.unsplash.com/photo-1559508551-44bff1de756b?w=600&q=80", span: "col-span-1 row-span-2", alt: "Rooftop" },
+  { type: "image", src: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80", span: "col-span-2 row-span-1", alt: "Vue panoramique" },
+  { type: "image", src: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80", span: "col-span-1 row-span-1", alt: "Bar" },
+  { type: "image", src: "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&q=80", span: "col-span-1 row-span-1", alt: "Cuisine" },
 ];
 
 export function GallerySection() {
@@ -84,27 +83,11 @@ export function GallerySection() {
               whileHover={{ scale: 1.01 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Media placeholder — replace with actual image/video */}
-              <div
-                className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
-                style={{
-                  background: `linear-gradient(135deg, #111 0%, #${["1A1410","1A1015","141A10","10151A","1A1510","151A14"][parseInt(item.alt.charCodeAt(0).toString()) % 6]} 100%)`,
-                }}
+              <img
+                src={item.src}
+                alt={item.alt}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-25 pointer-events-none">
-                {item.type === "video" ? (
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gold">
-                    <polygon points="5 3 19 12 5 21 5 3"/>
-                  </svg>
-                ) : (
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-gold">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>
-                  </svg>
-                )}
-                <span className="font-inter text-[10px] tracking-[0.3em] text-gold uppercase">
-                  {item.type === "video" ? "Vidéo" : "Photo"} à venir
-                </span>
-              </div>
               {/* Overlay on hover */}
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                 <p className="font-cormorant text-lg text-cream font-light italic translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
